@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.web.mvc.version>4.3.8.RELEASE</spring.web.mvc.version>
-		<cxf.version>3.1.11</cxf.version>
+		<spring.security.version>4.2.0.RELEASE</spring.security.version>
 		<jstl.version>1.2</jstl.version>
 	</properties>
 
@@ -94,6 +94,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.web.mvc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

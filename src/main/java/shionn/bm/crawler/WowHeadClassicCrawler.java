@@ -25,6 +25,7 @@ public class WowHeadClassicCrawler {
 			stats.add(parseSpan(e));
 		}
 		Item item = new Item();
+		item.setId(id);
 		item.setStats(stats);
 		return item;
 	}

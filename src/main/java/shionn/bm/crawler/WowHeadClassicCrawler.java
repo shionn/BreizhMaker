@@ -6,32 +6,43 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
+@Component
+@RequestScope
 public class WowHeadClassicCrawler {
 
-	public Item item(String id) throws IOException {
-		Document document = Jsoup.connect("https://classic.wowhead.com/item=" + id).get();
-		Element root = document.select("h1.heading-size-1 + noscript").first();
-		List<ItemStat> stats = new ArrayList<>();
-		stats.add(
-				new ItemStat(ItemStatType.slot, root.select("table").first().select("table td").first().text()));
-		for (Element e : root.select("table td span")) {
-			stats.add(parseSpan(e));
+	public Item item(String id) {
+		String url = "https://classic.wowhead.com/item=" + id;
+		try {
+			Connection connection = Jsoup.connect(url);
+			connection.timeout(5000);
+			Document document = connection.get();
+			Element root = document.select("h1.heading-size-1 + noscript").first();
+			List<ItemStat> stats = new ArrayList<>();
+			stats.add(new ItemStat(ItemStatType.slot, root.select("table").first().select("table td").first().text()));
+			for (Element e : root.select("table td span")) {
+				stats.add(parseSpan(e));
+			}
+			for (Element e : root.select("table").first().select("th")) {
+				stats.add(parseSpan(e));
+			}
+			Item item = new Item();
+			item.setId(id);
+			item.setStats(stats);
+			return item;
+		} catch (IOException e) {
+			throw new RuntimeException("can't connect to <" + url + ">", e);
 		}
-		for (Element e : root.select("table").first().select("th")) {
-			stats.add(parseSpan(e));
-		}
-		Item item = new Item();
-		item.setId(id);
-		item.setStats(stats);
-		return item;
 	}
 
 	private ItemStat parseSpan(Element e) {
-		if (e.html().contains("<!--scstart4:2-->")) {
+		if (e.html().contains("<!--scstart4:1-->") || e.html().contains("<!--scstart4:2-->")) {
 			return new ItemStat(ItemStatType.type, e.text());
 		}
 		if (e.html().contains("<!--ilvl-->")) {
@@ -63,6 +74,9 @@ public class WowHeadClassicCrawler {
 		}
 		if (e.text().contains("Equip: Increases damage and healing done by magical spells and effects by up to")) {
 			return new ItemStat(ItemStatType.spellpower, extract(e.text(), " (\\d+)\\.", 1));
+		}
+		if (e.text().matches("Equip: Improves your chance to get a critical strike with spells by \\d+%\\.")) {
+			return new ItemStat(ItemStatType.spellcrit, extract(e.text(), " (\\d+)%\\.", 1));
 		}
 		if (e.text().matches("Equip: \\+\\d+ Attack Power\\.")) {
 			return new ItemStat(ItemStatType.attackpower, extract(e.text(), " (\\+\\d+) ", 1));

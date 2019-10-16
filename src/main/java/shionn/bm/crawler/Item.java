@@ -6,6 +6,7 @@ public class Item {
 
 	private List<ItemStat> stats;
 	private String id;
+	private String name = "TODO";
 
 	public void setStats(List<ItemStat> stats) {
 		this.stats = stats;
@@ -26,6 +27,10 @@ public class Item {
 	@Override
 	public String toString() {
 		return stats.toString();
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

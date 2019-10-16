@@ -15,4 +15,12 @@ public class ItemStat {
 		return type + " " + value;
 	}
 
+	public ItemStatType getType() {
+		return type;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
 }

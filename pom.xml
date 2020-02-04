@@ -11,6 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.web.mvc.version>4.3.8.RELEASE</spring.web.mvc.version>
+		<spring.security.version>4.2.0.RELEASE</spring.security.version>
 		<cxf.version>3.1.11</cxf.version>
 		<jstl.version>1.2</jstl.version>
 	</properties>
@@ -60,6 +61,10 @@
 			<id>dev</id>
 			<properties>
 				<skiptest>false</skiptest>
+				<mybatis.driver>com.mysql.cj.jdbc.Driver</mybatis.driver>
+				<mybatis.url>jdbc:mysql://${wow.db.host}/wow?serverTimezone=Europe/Paris</mybatis.url>
+				<mybatis.username>${wow.db.user}</mybatis.username>
+				<mybatis.password>${wow.db.pass}</mybatis.password>
 			</properties>
 		</profile>
 		<profile>
@@ -68,24 +73,21 @@
 				<skiptest>true</skiptest>
 				<tomcat.url>http://51.15.172.54:8080/manager/text</tomcat.url>
 				<tomcat.server>DediBox</tomcat.server>
+				<mybatis.driver>com.mysql.cj.jdbc.Driver</mybatis.driver>
+				<mybatis.url>jdbc:mysql://${wow.db.host}/wow?serverTimezone=Europe/Paris</mybatis.url>
+				<mybatis.username>${wow.db.user}</mybatis.username>
+				<mybatis.password>${wow.db.pass}</mybatis.password>
 			</properties>
 		</profile>
 	</profiles>
 
 	<dependencies>
 
-		<!-- Rest -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.7.2</version>
-		</dependency>
-
 		<!-- api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -99,6 +101,41 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Persistence / MyBatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.3</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Commons -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.21</version>
 		</dependency>
 
 		<!-- Test -->

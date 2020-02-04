@@ -9,6 +9,7 @@ import javax.servlet.ServletRegistration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -45,7 +46,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected Filter[] getServletFilters() {
 		return new Filter[] { new CharacterEncodingFilter("UTF-8"), new RequestContextFilter(),
-				//				new DelegatingFilterProxy("springSecurityFilterChain")
+				new DelegatingFilterProxy("springSecurityFilterChain")
 		};
 	}
 

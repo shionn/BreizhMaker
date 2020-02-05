@@ -3,5 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
 <t:template>
-<jsp:attribute name="content"></jsp:attribute>
+	<jsp:attribute name="content">
+		<table class="pure-table pure-table-horizontal dkp">
+			<thead>
+				<tr>
+					<th>Personnage</th>
+					<th>Classe</th>
+					<th>DKP</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${players}" var="p">
+					<tr class="clazz">
+						<td>${p.name}</td>
+						<td><img src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
+						<td>${p.dkp}</td>
+						<td></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</jsp:attribute>
 </t:template>

@@ -24,14 +24,14 @@ public class DkpController {
 
 	@RequestMapping(value = "/dkp/add/{player}", method = RequestMethod.GET)
 	public ModelAndView add(@PathVariable("player") int player) {
-		return new ModelAndView("dkp").addObject("players",
-				session.getMapper(DkpDao.class).readAll());
+		return new ModelAndView("dkp-add")
+				.addObject("player", session.getMapper(DkpDao.class).readOne(player));
 	}
 
 	@RequestMapping(value = "/dkp/rm/{player}", method = RequestMethod.GET)
 	public ModelAndView rm(@PathVariable("player") int player) {
-		return new ModelAndView("dkp").addObject("players",
-				session.getMapper(DkpDao.class).readAll());
+		return new ModelAndView("dkp-add")
+				.addObject("player", session.getMapper(DkpDao.class).readOne(player));
 	}
 
 }

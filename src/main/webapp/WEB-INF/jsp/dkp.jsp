@@ -20,8 +20,8 @@
 						<td><img src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
 						<td>${p.dkp}</td>
 						<td>
-							<a class="pure-button button-error" href='<spring:url value="/dkp/rm/${p.id}"/>'>-</a>
-							<a class="pure-button button-success" href='<spring:url value="/dkp/add/${p.id}"/>'>+</a>
+							<a class="pure-button button-error button-xsmall" href='<spring:url value="/dkp/rm/${p.id}"/>'>-</a>
+							<a class="pure-button button-success button-xsmall" href='<spring:url value="/dkp/add/${p.id}"/>'>+</a>
 						</td>
 					</tr>
 				</c:forEach>

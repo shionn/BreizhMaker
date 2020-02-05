@@ -19,7 +19,7 @@
 		<a href="#" class="pure-menu-heading pure-menu-link">BreizhMaker</a>
 		<ul class="pure-menu-list">
 			<li class="pure-menu-item"><a href='<spring:url value="/dkp"/>' class="pure-menu-link">DKP</a></li>
-			<li class="pure-menu-item"><a href="#" class="pure-menu-link">Raid</a></li>
+			<li class="pure-menu-item"><a href='<spring:url value="/raid"/>' class="pure-menu-link">Raid</a></li>
 			<li class="pure-menu-item"><a href='<spring:url value="/admin"/>' class="pure-menu-link">Admin</a></li>
 		</ul>
 	</div>

@@ -1,11 +1,14 @@
 package shionn.bm.db.dbo;
 
+import java.util.List;
+
 public class Player {
 
 	private int id;
 	private String name;
 	private PlayerClass clazz;
 	private int dkp;
+	private List<DkpEntry> historic;
 
 	public int getId() {
 		return id;
@@ -37,5 +40,13 @@ public class Player {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<DkpEntry> getHistoric() {
+		return historic;
+	}
+
+	public void setHistoric(List<DkpEntry> historic) {
+		this.historic = historic;
 	}
 }

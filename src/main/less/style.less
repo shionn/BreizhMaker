@@ -8,6 +8,7 @@ aside {
 		border-radius: 4px;
 		color: white;
 		padding: .5em 1em;
+		margin-top: .5em;
 		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 
 		&.success {
@@ -20,11 +21,20 @@ aside {
 	}
 }
 
+table {
+	margin-top: .5em;
+}
+
 table.dkp {
 	img {
 		height:18px;
 	}
 	tr td:not(:first-child), tr th:not(:first-child) {
+		text-align: center;
+	}
+}
+table.dkp-history {
+	td, th {
 		text-align: center;
 	}
 }

@@ -15,11 +15,12 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${players}" var="p">
-					<tr class="clazz">
+					<tr>
 						<td>${p.name}</td>
 						<td><img src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
 						<td>${p.dkp}</td>
 						<td>
+							<a href='<spring:url value="/dkp/${p.id}"/>'>Historique</a>
 							<a class="pure-button button-error button-xsmall" href='<spring:url value="/dkp/rm/${p.id}"/>'>-</a>
 							<a class="pure-button button-success button-xsmall" href='<spring:url value="/dkp/add/${p.id}"/>'>+</a>
 						</td>

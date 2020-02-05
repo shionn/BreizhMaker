@@ -29,5 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN").and().httpBasic()
 				.realmName("BreizhMaker");
+		http.authorizeRequests().antMatchers("/dkp/add").hasRole("ADMIN").and().httpBasic()
+				.realmName("BreizhMaker");
+		http.authorizeRequests().antMatchers("/dkp/rm").hasRole("ADMIN").and().httpBasic()
+				.realmName("BreizhMaker");
 	}
 }

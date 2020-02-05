@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
 		integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47"
 		crossorigin="anonymous">
+<link rel="stylesheet" href="<spring:url value="/css/generated/style.css"/>" />
 <title>BreizhMaker</title>
 </head>
 <body>
@@ -22,6 +23,12 @@
 			<li class="pure-menu-item"><a href='<spring:url value="/admin"/>' class="pure-menu-link">Admin</a></li>
 		</ul>
 	</div>
+	<c:if test="${not empty message}">
+		<aside class="message success">${message}</aside>
+	</c:if>
+	<c:if test="${not empty error}">
+		<aside class="message error">${error}</aside>
+	</c:if>
 	<jsp:invoke fragment="content" />
 </body>
 </html>

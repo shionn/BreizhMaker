@@ -1,5 +1,6 @@
 package shionn.bm.security;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -8,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Controller;
 
-import shionn.bm.db.dao.AuthDao;
+import shionn.bm.db.dao.UserDao;
 import shionn.bm.db.dbo.User;
 
 /**
@@ -30,13 +31,16 @@ public class AuthenticationProvider implements org.springframework.security.auth
 
 	@Override
 	public Authentication authenticate(Authentication authentication) {
-		User user = session.getMapper(AuthDao.class).read((String) authentication.getPrincipal());
+		User user = session.getMapper(UserDao.class).read((String) authentication.getPrincipal());
 		if (user == null) {
 			throw new BadCredentialsException("Utilisateur Inconnu");
 		} else if (checkPassword((UsernamePasswordAuthenticationToken) authentication, user)) {
 			authentication = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
 					authentication.getCredentials(),
-					AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+					AuthorityUtils
+							.createAuthorityList(
+									user.getRole() == null ? new String[0]
+											: user.getRole().split(":")));
 		} else {
 			throw new BadCredentialsException("Mauvais Mdp");
 		}
@@ -48,7 +52,6 @@ public class AuthenticationProvider implements org.springframework.security.auth
 	}
 
 	private String encodePassword(UsernamePasswordAuthenticationToken token) {
-		return org.apache.commons.codec.digest.DigestUtils
-				.sha256Hex((String) token.getCredentials());
+		return DigestUtils.sha256Hex((String) token.getCredentials());
 	}
 }

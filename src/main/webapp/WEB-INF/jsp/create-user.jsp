@@ -5,21 +5,23 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
 <t:template>
 <jsp:attribute name="content">
-	<spring:url value="/admin/create-player" var="url"/>
-	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+	<form:form method="POST" class="pure-form pure-form-aligned">
 		<fieldset>
-			<legend>Creation joueur</legend>
 			<div class="pure-control-group">
 				<label for="pseudo">Pseudo</label>
 				<input name="pseudo" type="text" placeholder="pseudo" required="required">
 			</div>
 			<div class="pure-control-group">
-				<label for="class">Class</label>
-				<select name="class">
-					<c:forEach items="${playerclasses}" var="c">
-						<option value="${c}">${c}</option>
-					</c:forEach>
-				</select>
+				<label for="email">Email</label>
+				<input name="email" type="email" placeholder="email" required="required">
+			</div>
+			<div class="pure-control-group">
+				<label for="pass">Password</label>
+				<input name="pass" type="password" placeholder="password" required="required">
+			</div>
+			<div class="pure-control-group">
+				<label for="pass-confirm">Confirm Password</label>
+				<input name="pass-confirm" type="password" placeholder="password" required="required">
 			</div>
 			<div class="pure-controls">
 				<button type="submit" class="pure-button pure-button-primary">Valider</button>

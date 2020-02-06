@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 05, 2020 at 04:43 PM
+-- Generation Time: Feb 05, 2020 at 11:25 PM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.0.33-0+deb9u5
 
@@ -23,6 +23,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `dkp`
+-- (See below for the actual view)
+--
+CREATE TABLE `dkp` (
+`id` int(11)
+,`name` varchar(64)
+,`class` varchar(16)
+,`dkp` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `dkp-entry`
 --
 
@@ -31,7 +44,7 @@ CREATE TABLE `dkp-entry` (
   `player` int(11) NOT NULL,
   `raid` int(11) DEFAULT NULL,
   `user` int(11) DEFAULT NULL,
-  `comment` varchar(512) DEFAULT NULL,
+  `reason` varchar(512) DEFAULT NULL,
   `value` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -57,8 +70,9 @@ CREATE TABLE `player` (
 CREATE TABLE `raid` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `date-start` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date-end` datetime DEFAULT NULL
+  `start` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end` datetime DEFAULT NULL,
+  `running` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -86,6 +100,15 @@ CREATE TABLE `user` (
   `role` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `dkp`
+--
+DROP TABLE IF EXISTS `dkp`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dkp`  AS  select `p`.`id` AS `id`,`p`.`name` AS `name`,`p`.`class` AS `class`,ifnull(sum(`e`.`value`),0) AS `dkp` from (`player` `p` left join `dkp-entry` `e` on((`p`.`id` = `e`.`player`))) group by `p`.`id` ;
+
 --
 -- Indexes for dumped tables
 --
@@ -109,7 +132,8 @@ ALTER TABLE `player`
 -- Indexes for table `raid`
 --
 ALTER TABLE `raid`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `running` (`running`);
 
 --
 -- Indexes for table `raid-entry`
@@ -138,7 +162,7 @@ ALTER TABLE `dkp-entry`
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `raid`
 --
@@ -148,7 +172,7 @@ ALTER TABLE `raid`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --

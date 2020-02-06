@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="content" fragment="true"%>
+<%@ attribute name="script" fragment="true"%>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,6 +31,12 @@
 		<aside class="message error">${error}</aside>
 	</c:if>
 	<jsp:invoke fragment="content" />
+	<script src="<spring:url value="/js/jquery-3.2.1.min.js"/>"></script>
+	<script src="<spring:url value="/js/jquery-ui-datepicker-1.12.1.min.js"/>"></script>
+	<script src="<spring:url value="/js/jquery-ui-datepicker-fr-1.12.1.js"/>"></script>
+	<script src="<spring:url value="/js/jquery-ui-timepicker-addon.min.js"/>"></script>
+	<script src="<spring:url value="/js/jquery-ui-timepicker-fr.js"/>"></script>
+	<jsp:invoke fragment="script" />
 </body>
 </html>
 

@@ -31,6 +31,8 @@ public class RaidController {
 			@RequestParam("start") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm") Date start,
 			@RequestParam("end") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm") Date end,
 			RedirectAttributes attr) {
+		session.getMapper(RaidDao.class).create(name, start, end);
+		session.commit();
 		return "redirect:/raid";
 	}
 

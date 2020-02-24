@@ -51,14 +51,14 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${raid.players}" var="e" varStatus="i">
-								<tr>
+								<tr class="${e.player.clazz}">
 									<td>
 										<input type="hidden" name="players[${i.index}].player.id" value="${e.player.id}">
 										${e.player.name}
 									</td>
-									<td style="text-align:center"><img class="class" src='<spring:url value="/img/${e.player.clazz}.jpg"/>'/></td>
-									<td style="text-align:center">${e.player.rank}</td>
-									<td style="text-align:center">${e.player.dkp}</td>
+									<td><img class="class" src='<spring:url value="/img/${e.player.clazz}.jpg"/>'/></td>
+									<td>${e.player.rank}</td>
+									<td>${e.player.dkp}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

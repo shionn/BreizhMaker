@@ -15,7 +15,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${players}" var="p">
-					<tr>
+					<tr class="${p.clazz}">
 						<td>${p.name}</td>
 						<td><img class="class" src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
 						<td>${p.dkp}</td>

@@ -2,10 +2,10 @@
 -- version 4.6.6deb4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 05, 2020 at 11:25 PM
--- Server version: 10.1.26-MariaDB-0+deb9u1
--- PHP Version: 7.0.33-0+deb9u5
+-- Client :  localhost:3306
+-- Généré le :  Lun 24 Février 2020 à 11:31
+-- Version du serveur :  10.1.26-MariaDB-0+deb9u1
+-- Version de PHP :  7.0.33-0+deb9u5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,14 +17,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wow`
+-- Base de données :  `wow`
 --
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `dkp`
--- (See below for the actual view)
+-- Doublure de structure pour la vue `dkp`
+-- (Voir ci-dessous la vue réelle)
 --
 CREATE TABLE `dkp` (
 `id` int(11)
@@ -36,7 +36,7 @@ CREATE TABLE `dkp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dkp-entry`
+-- Structure de la table `dkp-entry`
 --
 
 CREATE TABLE `dkp-entry` (
@@ -45,26 +45,29 @@ CREATE TABLE `dkp-entry` (
   `raid` int(11) DEFAULT NULL,
   `user` int(11) DEFAULT NULL,
   `reason` varchar(512) DEFAULT NULL,
+  `value-type` varchar(32) NOT NULL,
   `value` int(11) NOT NULL,
+  `value-percent` int(11) DEFAULT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `player`
+-- Structure de la table `player`
 --
 
 CREATE TABLE `player` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `class` varchar(16) NOT NULL
+  `class` varchar(16) NOT NULL,
+  `rank` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `raid`
+-- Structure de la table `raid`
 --
 
 CREATE TABLE `raid` (
@@ -72,13 +75,14 @@ CREATE TABLE `raid` (
   `name` varchar(128) NOT NULL,
   `start` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end` datetime DEFAULT NULL,
-  `running` tinyint(1) NOT NULL DEFAULT '0'
+  `running` tinyint(1) NOT NULL DEFAULT '0',
+  `boss` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `raid-entry`
+-- Structure de la table `raid-entry`
 --
 
 CREATE TABLE `raid-entry` (
@@ -89,7 +93,7 @@ CREATE TABLE `raid-entry` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -103,18 +107,18 @@ CREATE TABLE `user` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `dkp`
+-- Structure de la vue `dkp`
 --
 DROP TABLE IF EXISTS `dkp`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dkp`  AS  select `p`.`id` AS `id`,`p`.`name` AS `name`,`p`.`class` AS `class`,ifnull(sum(`e`.`value`),0) AS `dkp` from (`player` `p` left join `dkp-entry` `e` on((`p`.`id` = `e`.`player`))) group by `p`.`id` ;
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `dkp-entry`
+-- Index pour la table `dkp-entry`
 --
 ALTER TABLE `dkp-entry`
   ADD PRIMARY KEY (`id`),
@@ -123,62 +127,62 @@ ALTER TABLE `dkp-entry`
   ADD KEY `user` (`user`);
 
 --
--- Indexes for table `player`
+-- Index pour la table `player`
 --
 ALTER TABLE `player`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `raid`
+-- Index pour la table `raid`
 --
 ALTER TABLE `raid`
   ADD PRIMARY KEY (`id`),
   ADD KEY `running` (`running`);
 
 --
--- Indexes for table `raid-entry`
+-- Index pour la table `raid-entry`
 --
 ALTER TABLE `raid-entry`
   ADD PRIMARY KEY (`raid`,`player`),
   ADD KEY `raid-entry-player` (`player`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `dkp-entry`
+-- AUTO_INCREMENT pour la table `dkp-entry`
 --
 ALTER TABLE `dkp-entry`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `player`
+-- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `raid`
+-- AUTO_INCREMENT pour la table `raid`
 --
 ALTER TABLE `raid`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables exportées
 --
 
 --
--- Constraints for table `dkp-entry`
+-- Contraintes pour la table `dkp-entry`
 --
 ALTER TABLE `dkp-entry`
   ADD CONSTRAINT `dkp-entry-player` FOREIGN KEY (`player`) REFERENCES `player` (`id`),
@@ -186,7 +190,7 @@ ALTER TABLE `dkp-entry`
   ADD CONSTRAINT `dkp-entry-user` FOREIGN KEY (`user`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `raid-entry`
+-- Contraintes pour la table `raid-entry`
 --
 ALTER TABLE `raid-entry`
   ADD CONSTRAINT `raid-entry-player` FOREIGN KEY (`player`) REFERENCES `player` (`id`),

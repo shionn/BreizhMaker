@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import shionn.bm.db.dao.PlayerDao;
 import shionn.bm.db.dbo.PlayerClass;
+import shionn.bm.db.dbo.PlayerRank;
 
 @Controller
 public class AdminController {
@@ -19,13 +20,15 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView admin() {
-		return new ModelAndView("admin").addObject("playerclasses", PlayerClass.values());
+		return new ModelAndView("admin").addObject("playerclasses", PlayerClass.values())
+				.addObject("playerranks", PlayerRank.values());
 	}
 
 	@RequestMapping(value = "/admin/create-player", method = RequestMethod.POST)
 	public String getCreateUser(@RequestParam("pseudo") String pseudo,
-			@RequestParam("class") PlayerClass clazz, RedirectAttributes attr) {
-		session.getMapper(PlayerDao.class).create(pseudo, clazz);
+			@RequestParam("class") PlayerClass clazz, @RequestParam("rank") PlayerRank rank,
+			RedirectAttributes attr) {
+		session.getMapper(PlayerDao.class).create(pseudo, clazz, rank);
 		session.commit();
 		attr.addFlashAttribute("message", "Personnage crée");
 		return "redirect:/admin";

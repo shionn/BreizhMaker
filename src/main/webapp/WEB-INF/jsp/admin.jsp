@@ -21,6 +21,14 @@
 					</c:forEach>
 				</select>
 			</div>
+			<div class="pure-control-group">
+				<label for="rank">Grade</label>
+				<select name="rank">
+					<c:forEach items="${playerranks}" var="r">
+						<option value="${r}">${r}</option>
+					</c:forEach>
+				</select>
+			</div>
 			<div class="pure-controls">
 				<button type="submit" class="pure-button pure-button-primary">Valider</button>
 			</div>

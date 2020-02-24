@@ -24,7 +24,7 @@ public class RaidController {
 
 	private static final int BOSS_DKP = 2;
 	private static final int RAID_OFF = 10;
-	private static final int IN_TIME = 4;
+	private static final int IN_TIME = 5;
 	private static final long MINUTE_15 = 15 * 60 * 1000;
 	@Autowired
 	private SqlSession session;

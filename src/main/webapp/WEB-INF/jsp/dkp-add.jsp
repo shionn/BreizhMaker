@@ -35,4 +35,9 @@
 		</fieldset>
 	</form:form>
 </jsp:attribute>
+<jsp:attribute name="script">
+	<script type="text/javascript">
+		$("input[type=datetime]").datetimepicker({dateFormat:"dd/mm/yy", timeFormat:"HH:mm"});
+	</script>
+</jsp:attribute>
 </t:template>

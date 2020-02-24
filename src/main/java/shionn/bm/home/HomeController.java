@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Code sous licence GPLv3 (http://www.gnu.org/licenses/gpl.html)
@@ -18,6 +19,11 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "redirect:/dkp";
+	}
+
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public ModelAndView info() {
+		return new ModelAndView("info");
 	}
 
 }

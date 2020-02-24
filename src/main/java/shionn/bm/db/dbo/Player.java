@@ -9,6 +9,7 @@ public class Player {
 	private PlayerClass clazz;
 	private int dkp;
 	private List<DkpEntry> historic;
+	private PlayerRank rank;
 
 	public int getId() {
 		return id;
@@ -48,5 +49,13 @@ public class Player {
 
 	public void setHistoric(List<DkpEntry> historic) {
 		this.historic = historic;
+	}
+
+	public PlayerRank getRank() {
+		return rank;
+	}
+
+	public void setRank(PlayerRank rank) {
+		this.rank = rank;
 	}
 }

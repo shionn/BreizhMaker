@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
 <t:template>
 	<jsp:attribute name="content">
-		<table class="pure-table pure-table-horizontal dkp">
+		<table class="pure-table pure-table-horizontal">
 			<thead>
 				<tr>
 					<th>Personnage</th>
@@ -17,7 +17,7 @@
 				<c:forEach items="${players}" var="p">
 					<tr>
 						<td>${p.name}</td>
-						<td><img src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
+						<td><img class="class" src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
 						<td>${p.dkp}</td>
 						<td>
 							<a href='<spring:url value="/dkp/${p.id}"/>'>Historique</a>

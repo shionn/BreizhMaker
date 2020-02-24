@@ -1,5 +1,6 @@
 package shionn.bm.db.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -35,8 +36,8 @@ public interface DkpDao {
 			+ "WHERE player = #{id} ORDER BY date DESC")
 	List<DkpEntry> readHistoricDetail(int id);
 
-	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason) VALUES (#{player}, #{user}, #{value}, #{reason})")
+	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason, `value-type`, date) VALUES (#{player}, #{user}, #{value}, #{reason}, 'amount', #{date})")
 	int addEntry(@Param("player") int player, @Param("user") int user, @Param("value") int value,
-			@Param("reason") String reason);
+			@Param("reason") String reason, @Param("date") Date date);
 
 }

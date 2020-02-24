@@ -35,5 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.realmName("BreizhMaker");
 		http.authorizeRequests().antMatchers("/raid/add").hasRole("ADMIN").and().httpBasic()
 				.realmName("BreizhMaker");
+		http.authorizeRequests().antMatchers("/raid/update").hasRole("ADMIN").and().httpBasic()
+				.realmName("BreizhMaker");
+		http.authorizeRequests().antMatchers("/raid/edit").hasRole("ADMIN").and().httpBasic()
+				.realmName("BreizhMaker");
 	}
 }

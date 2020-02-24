@@ -1,9 +1,11 @@
 package shionn.bm.dkp;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,20 +47,22 @@ public class DkpController implements Serializable {
 	public ModelAndView add(@PathVariable("player") int player) {
 		return new ModelAndView("dkp-add")
 				.addObject("player", session.getMapper(DkpDao.class).readOne(player))
-				.addObject("type", "Ajouter");
+				.addObject("date", new Date()).addObject("type", "Ajouter");
 	}
 
 	@RequestMapping(value = "/dkp/rm/{player}", method = RequestMethod.GET)
 	public ModelAndView rm(@PathVariable("player") int player) {
 		return new ModelAndView("dkp-add")
 				.addObject("player", session.getMapper(DkpDao.class).readOne(player))
-				.addObject("type", "Retirer");
+				.addObject("date", new Date()).addObject("type", "Retirer");
 	}
 
 	@RequestMapping(value = "/dkp/add/{player}", method = RequestMethod.POST)
 	public String add(@PathVariable("player") int player, @RequestParam("value") int value,
-			@RequestParam("reason") String reason, RedirectAttributes attr) {
-		session.getMapper(DkpDao.class).addEntry(player, user.getId(), value, reason);
+			@RequestParam("reason") String reason,
+			@RequestParam("date") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm") Date date,
+			RedirectAttributes attr) {
+		session.getMapper(DkpDao.class).addEntry(player, user.getId(), value, reason, date);
 		session.commit();
 		attr.addFlashAttribute("message", "Ajout de " + value + " dkp à "
 				+ session.getMapper(PlayerDao.class).readOne(player).getName());
@@ -67,8 +71,10 @@ public class DkpController implements Serializable {
 
 	@RequestMapping(value = "/dkp/rm/{player}", method = RequestMethod.POST)
 	public String rm(@PathVariable("player") int player, @RequestParam("value") int value,
-			@RequestParam("reason") String reason, RedirectAttributes attr) {
-		session.getMapper(DkpDao.class).addEntry(player, user.getId(), -value, reason);
+			@RequestParam("reason") String reason,
+			@RequestParam("date") @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm") Date date,
+			RedirectAttributes attr) {
+		session.getMapper(DkpDao.class).addEntry(player, user.getId(), -value, reason, date);
 		session.commit();
 		attr.addFlashAttribute("message", "Retrait de " + value + " dkp à "
 				+ session.getMapper(PlayerDao.class).readOne(player).getName());

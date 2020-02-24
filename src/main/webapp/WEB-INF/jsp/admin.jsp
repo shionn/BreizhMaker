@@ -5,6 +5,20 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
 <t:template>
 <jsp:attribute name="content">
+	<spring:url value="/admin/depreciation" var="url"/>
+	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+		<fieldset>
+			<legend>Dépréciation</legend>
+			<div class="pure-control-group">
+				<label for="value">Valeur</label>
+				<input name="value" type="text" value="20" required="required"> %
+			</div>
+			<div class="pure-controls">
+				<button type="submit" class="pure-button pure-button-primary">Ajouter</button>
+			</div>
+		</fieldset>
+	</form:form>
+
 	<spring:url value="/admin/create-player" var="url"/>
 	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
 		<fieldset>

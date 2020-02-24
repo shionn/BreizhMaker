@@ -25,8 +25,7 @@ public interface DkpDao {
 	Player readOne(int player);
 
 	@Select("SELECT * FROM dkp WHERE id = #{player}")
-	@Results({
-			@Result(column = "class", property = "clazz"),
+	@Results({ @Result(column = "class", property = "clazz"),
 			@Result(column = "id", property = "historic", many = @Many(select = "readHistoricDetail")) })
 	Player readHistoric(int player);
 
@@ -36,8 +35,15 @@ public interface DkpDao {
 			+ "WHERE player = #{id} ORDER BY date DESC")
 	List<DkpEntry> readHistoricDetail(int id);
 
-	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason, `value-type`, date) VALUES (#{player}, #{user}, #{value}, #{reason}, 'amount', #{date})")
+	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason, `value-type`, date) "
+			+ "VALUES (#{player}, #{user}, #{value}, #{reason}, 'amount', #{date})")
 	int addEntry(@Param("player") int player, @Param("user") int user, @Param("value") int value,
 			@Param("reason") String reason, @Param("date") Date date);
+
+	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason, `value-type`, `value-percent`) "
+			+ "VALUES (#{player}, #{author}, #{amount}, #{reason}, 'percent', #{percent})")
+	int addPercentEntry(@Param("player") int player, @Param("author") int author,
+			@Param("amount") int amount, @Param("reason") String reason,
+			@Param("percent") int percent);
 
 }

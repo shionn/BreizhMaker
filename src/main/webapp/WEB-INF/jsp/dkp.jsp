@@ -7,9 +7,9 @@
 		<table class="pure-table pure-table-horizontal">
 			<thead>
 				<tr>
-					<th>Personnage</th>
-					<th>Classe</th>
-					<th>DKP</th>
+					<th><a href='<spring:url value="/dkp/sort/name"/>' style="text-decoration: none; color: black;">Personnage</a></th>
+					<th><a href='<spring:url value="/dkp/sort/clazz"/>' style="text-decoration: none; color: black;">Classe</a></th>
+					<th><a href='<spring:url value="/dkp/sort/dkp"/>' style="text-decoration: none; color: black;">DKP</a></th>
 					<th>#</th>
 				</tr>
 			</thead>

@@ -43,6 +43,12 @@ public class DkpController implements Serializable {
 				session.getMapper(DkpDao.class).readHistoric(player));
 	}
 
+	@RequestMapping(value = "/dkp/sort/{order}", method = RequestMethod.GET)
+	public String orderBy(@PathVariable("order") DkpOrder order) {
+		this.order = order;
+		return "redirect:/dkp";
+	}
+
 	@RequestMapping(value = "/dkp/add/{player}", method = RequestMethod.GET)
 	public ModelAndView add(@PathVariable("player") int player) {
 		return new ModelAndView("dkp-add")

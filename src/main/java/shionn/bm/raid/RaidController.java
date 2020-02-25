@@ -1,6 +1,7 @@
 package shionn.bm.raid;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import shionn.bm.db.dao.RaidDao;
 import shionn.bm.db.dbo.Raid;
 import shionn.bm.db.dbo.RaidEntry;
 import shionn.bm.db.dbo.User;
+import shionn.bm.dkp.DkpOrder;
 
 @Controller
 public class RaidController {
@@ -31,10 +33,17 @@ public class RaidController {
 	@Autowired
 	private User user;
 
+	private DkpOrder order = DkpOrder.clazz;
+
 	@RequestMapping(value = "/raid", method = RequestMethod.GET)
 	public ModelAndView list() {
+		RaidDao dao = session.getMapper(RaidDao.class);
+		List<Raid> raids = dao.listRunnings();
+		for (Raid raid : raids) {
+			raid.setPlayers(dao.listRunningPlayer(raid.getId(), order));
+		}
 		return new ModelAndView("raid").addObject("runnings",
-				session.getMapper(RaidDao.class).listRunnings());
+				raids);
 	}
 
 	@RequestMapping(value = "/raid/add", method = RequestMethod.POST)
@@ -85,6 +94,12 @@ public class RaidController {
 			}
 		}
 		session.commit();
+		return "redirect:/raid";
+	}
+
+	@RequestMapping(value = "/raid/sort/{order}", method = RequestMethod.GET)
+	public String orderBy(@PathVariable("order") DkpOrder order) {
+		this.order = order;
 		return "redirect:/raid";
 	}
 

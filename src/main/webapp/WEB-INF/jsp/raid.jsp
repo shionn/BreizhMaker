@@ -43,10 +43,10 @@
 								<th colspan="4">Membre participant (<a href='<spring:url value="/raid/edit/member/${raid.id}"/>'>Editer / Ajouter</a>)</th>
 							</tr>
 							<tr>
-								<th>Membre</th>
-								<th>Classe</th>
+								<th><a href='<spring:url value="/raid/sort/name"/>' style="text-decoration: none; color: black;">Personnage</a></th>
+								<th><a href='<spring:url value="/raid/sort/clazz"/>' style="text-decoration: none; color: black;">Classe</a></th>
 								<th>Rang</th>
-								<th>Dkp</th>
+								<th><a href='<spring:url value="/raid/sort/dkp"/>' style="text-decoration: none; color: black;">DKP</a></th>
 							</tr>
 						</thead>
 						<tbody>

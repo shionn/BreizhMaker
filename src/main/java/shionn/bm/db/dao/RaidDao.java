@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -14,25 +13,25 @@ import org.apache.ibatis.annotations.Update;
 
 import shionn.bm.db.dbo.Raid;
 import shionn.bm.db.dbo.RaidEntry;
+import shionn.bm.dkp.DkpOrder;
 
 public interface RaidDao {
 
 	@Select("SELECT * FROM raid WHERE running IS true")
-	@Results({ @Result(column = "id", property = "id"),
-			@Result(column = "id", property = "players", many = @Many(select = "listRunningPlayer")) })
 	public List<Raid> listRunnings();
 
 	@Select("SELECT * " //
 			+ "FROM dkp AS p " //
 			+ "INNER JOIN `raid-entry`AS e ON e.player = p.id AND e.raid = #{raid} "
-			+ "ORDER BY class, dkp DESC")
+			+ "ORDER BY ${order.sql}")
 	@Results({ @Result(column = "id", property = "player.id"),
 			@Result(column = "name", property = "player.name"),
 			@Result(column = "rank", property = "player.rank"),
 			@Result(column = "class", property = "player.clazz"),
 			@Result(column = "dkp", property = "player.dkp"),
 			@Result(column = "id", property = "player.id") })
-	public List<RaidEntry> listRunningPlayer(@Param("raid") int raid);
+	public List<RaidEntry> listRunningPlayer(@Param("raid") int raid,
+			@Param("order") DkpOrder order);
 
 	@Insert("INSERT INTO raid (name, start, end, running, boss) VALUES (#{name}, #{start}, #{end}, true, 0)")
 	public void create(@Param("name") String name, @Param("start") Date start,

@@ -9,6 +9,7 @@
 				<tr>
 					<th><a href='<spring:url value="/dkp/sort/name"/>' style="text-decoration: none; color: black;">Personnage</a></th>
 					<th><a href='<spring:url value="/dkp/sort/clazz"/>' style="text-decoration: none; color: black;">Classe</a></th>
+					<th>Rang</th>
 					<th><a href='<spring:url value="/dkp/sort/dkp"/>' style="text-decoration: none; color: black;">DKP</a></th>
 					<th>#</th>
 				</tr>
@@ -18,6 +19,7 @@
 					<tr class="${p.clazz}">
 						<td>${p.name}</td>
 						<td><img class="class" src='<spring:url value="/img/${p.clazz}.jpg"/>'/></td>
+						<td>${p.rank}</td>
 						<td>${p.dkp}</td>
 						<td>
 							<a href='<spring:url value="/dkp/${p.id}"/>'>Historique</a>

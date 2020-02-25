@@ -14,7 +14,7 @@
 				${player.name}
 			</div>
 			<div class="pure-control-group">
-				<label for="dkp">DKP</label>
+				<label for="dkp">DKP Actuel</label>
 				<input type="text" name="dkp" value="${player.dkp}" readonly="readonly">
 			</div>
 			<div class="pure-control-group">

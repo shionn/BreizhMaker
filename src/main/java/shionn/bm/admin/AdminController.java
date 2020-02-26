@@ -44,7 +44,7 @@ public class AdminController {
 	public String dkpDepreciation(@RequestParam("value") int value) {
 		DkpDao dao = session.getMapper(DkpDao.class);
 		for (Player player : dao.readAll(DkpOrder.name)) {
-			int amount = player.getDkp() * value / 100;
+			int amount = Math.round(player.getDkp() * value / 100f);
 			dao.addPercentEntry(player.getId(), user.getId(), -amount, "Dépréciation", value);
 		}
 		session.commit();

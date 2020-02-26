@@ -1,5 +1,6 @@
 package shionn.bm.raid;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +24,9 @@ import shionn.bm.db.dbo.User;
 import shionn.bm.dkp.DkpOrder;
 
 @Controller
-public class RaidController {
+@SessionScope
+public class RaidController implements Serializable {
+	private static final long serialVersionUID = -6557111787828849090L;
 
 	private static final int BOSS_DKP = 2;
 	private static final int RAID_OFF = 10;

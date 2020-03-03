@@ -62,9 +62,9 @@ public interface RaidDao {
 	@Insert("INSERT INTO `raid-entry` (raid, player) VALUES (#{raid}, #{player})")
 	public int addMember(@Param("raid") int raid, @Param("player") int player);
 
-	@Insert("INSERT INTO `dkp-entry` (player, raid, user, reason, `value-type`, value) "
-			+ "VALUE (#{player}, #{raid}, #{author}, #{reason}, 'amount', #{dkp} )")
+	@Insert("INSERT INTO `dkp-entry` (player, raid, user, reason, `value-type`, value, `date`) "
+			+ "VALUE (#{player}, #{raid}, #{author}, #{reason}, 'amount', #{dkp}, #{date} )")
 	public int addDkpEntry(@Param("player") int player, @Param("raid") int raid,
 			@Param("author") int author, @Param("reason") String reason,
-			@Param("dkp") int dkp);
+			@Param("dkp") int dkp, @Param("date") Date date);
 }

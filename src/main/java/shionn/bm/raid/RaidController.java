@@ -67,7 +67,7 @@ public class RaidController implements Serializable {
 			int dkp = computeDkp(raid);
 			for (RaidEntry e : raid.getPlayers()) {
 				dao.addDkpEntry(e.getPlayer().getId(), raid.getId(), user.getId(), raid.getName(),
-						dkp);
+						dkp, raid.getEnd());
 			}
 		}
 		dao.update(raid);

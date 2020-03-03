@@ -66,6 +66,10 @@
 					<td>Absence Injustifié</td>
 					<td>-50 DKP</td>
 				</tr>
+				<tr>
+					<td>Robot réparateur</td>
+					<td>15 DKP</td>
+				</tr>
 			</tbody>
 		</table>
 	</jsp:attribute>

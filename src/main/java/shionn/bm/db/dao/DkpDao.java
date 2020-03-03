@@ -32,8 +32,8 @@ public interface DkpDao {
 	@Select("SELECT d.reason, d.value, d.date, u.name AS author " //
 			+ "FROM `dkp-entry` AS d " //
 			+ "LEFT JOIN user AS u ON d.user = u.id " //
-			+ "WHERE player = #{id} ORDER BY date DESC")
-	List<DkpEntry> readHistoricDetail(int id);
+			+ "WHERE player = #{player} ORDER BY date DESC")
+	List<DkpEntry> readHistoricDetail(int player);
 
 	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason, `value-type`, date) "
 			+ "VALUES (#{player}, #{user}, #{value}, #{reason}, 'amount', #{date})")

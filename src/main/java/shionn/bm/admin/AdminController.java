@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import shionn.bm.db.dao.DkpDao;
+import shionn.bm.db.dao.DkpPercentRebuildDao;
 import shionn.bm.db.dao.PlayerDao;
+import shionn.bm.db.dbo.DkpEntry;
 import shionn.bm.db.dbo.Player;
 import shionn.bm.db.dbo.PlayerClass;
 import shionn.bm.db.dbo.PlayerRank;
@@ -44,8 +46,20 @@ public class AdminController {
 	public String dkpDepreciation(@RequestParam("value") int value) {
 		DkpDao dao = session.getMapper(DkpDao.class);
 		for (Player player : dao.readAll(DkpOrder.name)) {
-			int amount = Math.round(player.getDkp() * value / 100f);
-			dao.addPercentEntry(player.getId(), user.getId(), -amount, "Dépréciation", value);
+			int amount = Math.round(player.getDkp() * -value / 100f);
+			dao.addPercentEntry(player.getId(), user.getId(), amount, "Dépréciation", -value);
+		}
+		session.commit();
+		return "redirect:/dkp";
+	}
+
+	@RequestMapping(value = "/admin/dkpRebuildPercent", method = RequestMethod.POST)
+	public String dkpRebuildPercent() {
+		DkpPercentRebuildDao dao = session.getMapper(DkpPercentRebuildDao.class);
+		for (DkpEntry entry : dao.readAllPercent()) {
+			int sum = dao.sumPlayerEntry(entry.getPlayer().getId(), entry.getDate());
+			int amount = Math.round(sum * entry.getValuePercent() / 100f);
+			dao.updateEntry(entry.getId(), amount);
 		}
 		session.commit();
 		return "redirect:/dkp";

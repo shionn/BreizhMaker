@@ -48,5 +48,17 @@
 			</div>
 		</fieldset>
 	</form:form>
+
+	<spring:url value="/admin/dkpRebuildPercent" var="url"/>
+	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+		<fieldset>
+			<legend>Recalculer les entrée en %</legend>
+			<p>Permet de recalculer les entrées en % (comme la dépréciation) si l'historique en amont à été modifié.</p>
+			<div class="pure-controls">
+				<button type="submit" class="pure-button pure-button-primary">Recalculer</button>
+			</div>
+		</fieldset>
+	</form:form>
+
 </jsp:attribute>
 </t:template>

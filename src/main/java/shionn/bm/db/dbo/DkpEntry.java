@@ -5,8 +5,11 @@ import java.util.Date;
 public class DkpEntry {
 	private String reason;
 	private int value;
+	private int valuePercent;
 	private Date date;
 	private String author;
+	private Player player;
+	private int id;
 
 	public String getReason() {
 		return reason;
@@ -38,5 +41,29 @@ public class DkpEntry {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setValuePercent(int valuePercent) {
+		this.valuePercent = valuePercent;
+	}
+
+	public int getValuePercent() {
+		return valuePercent;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

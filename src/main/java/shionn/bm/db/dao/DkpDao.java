@@ -29,10 +29,11 @@ public interface DkpDao {
 			@Result(column = "id", property = "historic", many = @Many(select = "readHistoricDetail")) })
 	Player readHistoric(int player);
 
-	@Select("SELECT d.reason, d.value, d.date, u.name AS author " //
+	@Select("SELECT d.reason, d.value, d.date, d.`value-percent`, u.name AS author " //
 			+ "FROM `dkp-entry` AS d " //
 			+ "LEFT JOIN user AS u ON d.user = u.id " //
 			+ "WHERE player = #{player} ORDER BY date DESC")
+	@Results({ @Result(column = "value-percent", property = "valuePercent") })
 	List<DkpEntry> readHistoricDetail(int player);
 
 	@Insert("INSERT INTO `dkp-entry` (player, user, value, reason, `value-type`, date) "

@@ -18,7 +18,7 @@
 				<c:forEach items="${player.historic}" var="h">
 					<tr>
 						<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${h.date}"/></td>
-						<td>${h.reason}</td>
+						<td>${h.reason}<c:if test="${h.valuePercent != 0}"> (${h.valuePercent}%)</c:if></td>
 						<td>${h.value}</td>
 						<td>${h.author}</td>
 					</tr>

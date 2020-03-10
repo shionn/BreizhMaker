@@ -63,14 +63,28 @@
 					<td>1 DKP / 15 minute</td>
 				</tr>
 				<tr>
+					<td>Robot réparateur</td>
+					<td>15 DKP</td>
+				</tr>
+				<tr>
+					<td>Valeur des compos fournit</td>
+					<td>1 DKP / 3 PO (valeur marchande HV)</td>
+				</tr>
+				<tr>
 					<td>Absence Injustifié</td>
 					<td>-50 DKP</td>
 				</tr>
 				<tr>
-					<td>Robot réparateur</td>
-					<td>15 DKP</td>
+					<td>Dépréciation Hebdo</td>
+					<td>-20% (du total du joeur le mercredi)</td>
 				</tr>
 			</tbody>
 		</table>
+		<p>Exemple, un MC de 10 boss en 2 heures :<br/>
+		5 dkp (arrivé à l'heure)<br/>
+		+ 8 * 1 dkp (1 dkp / 15 minute)<br/>
+		+ 10 * 2 dkp (2 dkp / boss)<br/>
+		+ 10 dkp (Fin de raid)<br>
+		= 43 dkp</p>
 	</jsp:attribute>
 </t:template>

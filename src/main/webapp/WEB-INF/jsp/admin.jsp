@@ -49,6 +49,24 @@
 		</fieldset>
 	</form:form>
 
+	<spring:url value="/admin/edit-player" var="url"/>
+	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+		<fieldset>
+			<legend>Edition joueur</legend>
+			<div class="pure-control-group">
+				<label for="id">Joeur à éditer</label>
+				<select name="id">
+					<c:forEach items="${players}" var="c">
+						<option value="${c.id}">${c.name}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="pure-controls">
+				<button type="submit" class="pure-button pure-button-primary">Commencer l'édition</button>
+			</div>
+		</fieldset>
+	</form:form>
+
 	<spring:url value="/admin/dkpRebuildPercent" var="url"/>
 	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
 		<fieldset>

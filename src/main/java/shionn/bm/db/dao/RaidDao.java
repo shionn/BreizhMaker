@@ -49,6 +49,7 @@ public interface RaidDao {
 	@Select("SELECT p.id, p.name, p.class, p.rank, r.raid AS member " //
 			+ "FROM       player      AS p " //
 			+ "LEFT JOIN `raid-entry` AS r ON r.player = p.id AND r.raid = #{raid} " //
+			+ "WHERE p.rank != 'inactif' " //
 			+ "ORDER by name")
 	@Results({ @Result(column = "id", property = "player.id"),
 			@Result(column = "name", property = "player.name"),

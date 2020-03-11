@@ -16,7 +16,7 @@ import shionn.bm.dkp.DkpOrder;
 
 public interface DkpDao {
 
-	@Select("SELECT * FROM dkp ORDER BY ${order.sql}")
+	@Select("SELECT * FROM dkp WHERE rank != 'inactif' ORDER BY ${order.sql}")
 	@Results({ @Result(column = "class", property = "clazz") })
 	List<Player> readAll(@Param("order") DkpOrder order);
 

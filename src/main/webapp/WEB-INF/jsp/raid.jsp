@@ -8,7 +8,7 @@
 	<jsp:attribute name="content">
 		<c:forEach items="${runnings}" var="raid" varStatus="i">
 			<spring:url value="/raid/update" var="url"/>
-			<form:form method="POST" class="pure-form pure-form-aligned" modelAttribute="raid" action="${url}">
+			<form:form method="POST" class="pure-form-aligned" modelAttribute="raid" action="${url}">
 				<fieldset>
 					<legend>${raid.name}</legend>
 					<input type="hidden" name="id" value="${raid.id}">
@@ -67,7 +67,7 @@
 			</form:form>
 		</c:forEach>
 		<spring:url value="/raid/add" var="url"/>
-		<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+		<form:form method="POST" class="pure-form-aligned" action="${url}">
 			<fieldset>
 				<legend>Creer un Raid</legend>
 				<div class="pure-control-group">

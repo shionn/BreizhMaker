@@ -6,7 +6,7 @@
 <t:template>
 <jsp:attribute name="content">
 	<spring:url value="/admin/depreciation" var="url"/>
-	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+	<form:form method="POST" class="pure-form-aligned" action="${url}">
 		<fieldset>
 			<legend>Dépréciation</legend>
 			<div class="pure-control-group">
@@ -20,7 +20,7 @@
 	</form:form>
 
 	<spring:url value="/admin/create-player" var="url"/>
-	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+	<form:form method="POST" class="pure-form-aligned" action="${url}">
 		<fieldset>
 			<legend>Creation joueur</legend>
 			<div class="pure-control-group">
@@ -50,7 +50,7 @@
 	</form:form>
 
 	<spring:url value="/admin/edit-player" var="url"/>
-	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+	<form:form method="POST" class="pure-form-aligned" action="${url}">
 		<fieldset>
 			<legend>Edition joueur</legend>
 			<div class="pure-control-group">
@@ -68,7 +68,7 @@
 	</form:form>
 
 	<spring:url value="/admin/dkpRebuildPercent" var="url"/>
-	<form:form method="POST" class="pure-form pure-form-aligned" action="${url}">
+	<form:form method="POST" class="pure-form-aligned" action="${url}">
 		<fieldset>
 			<legend>Recalculer les entrée en %</legend>
 			<p>Permet de recalculer les entrées en % (comme la dépréciation) si l'historique en amont à été modifié.</p>

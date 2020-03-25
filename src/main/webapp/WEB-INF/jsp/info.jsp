@@ -76,7 +76,7 @@
 				</tr>
 				<tr>
 					<td>Dépréciation Hebdo</td>
-					<td>-20% (du total du joeur le mercredi)</td>
+					<td>-20% (du total du joueur le mercredi)</td>
 				</tr>
 			</tbody>
 		</table>
